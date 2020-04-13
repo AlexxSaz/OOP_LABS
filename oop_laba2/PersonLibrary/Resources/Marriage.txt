@@ -1,0 +1,4 @@
+Married
+NotMarried
+Divorced
+Widower
