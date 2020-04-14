@@ -39,7 +39,8 @@ namespace ShapeLib
         {
             get
             {
-                return 4 / 3 * Math.PI * Math.Pow(Radius, 3.0);
+                return Math.Round((4 / 3) * Math.PI * 
+                    Math.Pow(Radius, 3.0), 2);
             }
         }
     }

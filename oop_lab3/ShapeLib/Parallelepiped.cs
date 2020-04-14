@@ -60,7 +60,7 @@ namespace ShapeLib
         {
             get
             {
-                return SquareOfBase * Height;
+                return Math.Round(SquareOfBase * Height, 2);
             }
         }
     }
