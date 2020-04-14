@@ -22,7 +22,7 @@ namespace oop_lab3
     public partial class MainWindow : Window
     {
         /// <summary>
-        /// 
+        /// Инициализация главного окна
         /// </summary>
         public MainWindow()
         {
@@ -30,10 +30,10 @@ namespace oop_lab3
         }
 
         /// <summary>
-        /// 
+        /// Расчет объема при нажатии
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Ссылка на кнопку расчета</param>
+        /// <param name="e">Информация о состоянии кнопки</param>
         private void Button_Calc(object sender, RoutedEventArgs e)
         {
             try
@@ -69,10 +69,10 @@ namespace oop_lab3
         }
 
         /// <summary>
-        /// 
+        /// Выбор пирамиды для расчета
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Ссылка на выбор пирамиды</param>
+        /// <param name="e">Информация о состоянии кнопки</param>
         private void PyramidCheck_Checked(object sender, RoutedEventArgs e)
         {
             TextSquare.Visibility = Visibility.Visible;
@@ -84,10 +84,10 @@ namespace oop_lab3
         }
 
         /// <summary>
-        /// 
+        /// Выбор сферы для расчета
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Ссылка на выбор сферы</param>
+        /// <param name="e">Информация о состоянии кнопки</param>
         private void SphereChek_Checked(object sender, RoutedEventArgs e)
         {
             TextSquare.Visibility = Visibility.Hidden;
@@ -99,11 +99,11 @@ namespace oop_lab3
         }
 
         /// <summary>
-        /// 
+        /// Выбор параллелепипеда для расчета
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ParallCheck_Checked(object sender, RoutedEventArgs e)
+        /// <param name="sender">Ссылка на выбор параллелепипеда</param>
+        /// <param name="e">Информация о состоянии кнопки</param>
+        private void ParallelepipedCheck_Checked(object sender, RoutedEventArgs e)
         {
             TextSquare.Visibility = Visibility.Visible;
             Square.Visibility = Visibility.Visible;

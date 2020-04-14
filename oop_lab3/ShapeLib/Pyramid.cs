@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 namespace ShapeLib
 {
     /// <summary>
-    /// 
+    /// Пирамида
     /// </summary>
     public class Pyramid : Shape
     {
         /// <summary>
-        /// Высота фигуры
+        /// Высота
         /// </summary>
         private double _height;
 
         /// <summary>
-        /// Площадь основания фигуры
+        /// Площадь основания
         /// </summary>
         private double _squareOfBase;
 
         /// <summary>
-        /// 
+        /// Высота пирамиды
         /// </summary>
         public double Height
         {
@@ -38,7 +38,7 @@ namespace ShapeLib
         }
 
         /// <summary>
-        /// 
+        /// Площадь основания пирамиды
         /// </summary>
         public double SquareOfBase
         {
@@ -54,7 +54,7 @@ namespace ShapeLib
         }
 
         /// <summary>
-        /// 
+        /// Расчет объема пирамиды
         /// </summary>
         public override double Volume
         {

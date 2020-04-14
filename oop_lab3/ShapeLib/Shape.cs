@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace ShapeLib
 {
     /// <summary>
-    /// 
+    /// Геометрические фигуры
     /// </summary>
     public abstract class Shape
     {
         /// <summary>
-        /// 
+        /// Расчет объема фигуры
         /// </summary>
         public virtual double Volume
         {

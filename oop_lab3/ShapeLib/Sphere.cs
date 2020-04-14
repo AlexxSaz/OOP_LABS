@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 namespace ShapeLib
 {
     /// <summary>
-    /// 
+    /// Сфера
     /// </summary>
     public class Sphere : Shape
     {
         /// <summary>
-        /// 
+        /// Радиус сферы
         /// </summary>
         private double _radius;
 
         /// <summary>
-        /// 
+        /// Радиус сферы
         /// </summary>
         public double Radius
         {
@@ -33,7 +33,7 @@ namespace ShapeLib
         }
 
         /// <summary>
-        /// 
+        /// Расчет объема
         /// </summary>
         public override double Volume
         {

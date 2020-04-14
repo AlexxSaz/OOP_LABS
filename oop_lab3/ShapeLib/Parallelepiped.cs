@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 namespace ShapeLib
 {
     /// <summary>
-    /// 
+    /// Параллелепипед
     /// </summary>
     public class Parallelepiped : Shape
     {
         /// <summary>
-        /// Высота фигуры
+        /// Высота
         /// </summary>
         private double _height;
 
         /// <summary>
-        /// Площадь основания фигуры
+        /// Площадь основания
         /// </summary>
         private double _squareOfBase;
 
         /// <summary>
-        /// 
+        /// Высота параллелепипеда
         /// </summary>
         public double Height
         {
@@ -38,7 +38,7 @@ namespace ShapeLib
         }
 
         /// <summary>
-        /// 
+        /// Площадь основания параллелепипеда
         /// </summary>
         public double SquareOfBase
         {
@@ -54,7 +54,7 @@ namespace ShapeLib
         }
 
         /// <summary>
-        /// 
+        /// Расчет объема параллелепипеда
         /// </summary>
         public override double Volume
         {
