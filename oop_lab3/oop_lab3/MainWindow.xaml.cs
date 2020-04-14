@@ -32,7 +32,7 @@ namespace oop_lab3
         /// <summary>
         /// Проверка наличия чисел в TextBox
         /// </summary>
-        private void CheckTextBoxData(string data)
+        private static void CheckTextBoxData(string data)
         {
             if (String.IsNullOrEmpty(data))
             {
@@ -40,8 +40,31 @@ namespace oop_lab3
             }
             else if (!double.TryParse(data, out double doubleData))
             {
-                throw new ArgumentException("Неверный формат ввода!");
+                throw new ArgumentException("Введите число!");
             }
+        }
+
+        /// <summary>
+        /// Очищение данных
+        /// </summary>
+        private void TextBoxClean()
+        {
+            Radius.Clear();
+            HeightOfShape.Clear();
+            Square.Clear();
+        }
+
+        /// <summary>
+        /// Отображение только нужных TextBox
+        /// </summary>
+        private void ShowActualTextBox()
+        {
+            TextSquare.Visibility = Visibility.Visible;
+            Square.Visibility = Visibility.Visible;
+            TextHeight.Visibility = Visibility.Visible;
+            HeightOfShape.Visibility = Visibility.Visible;
+            TextRadius.Visibility = Visibility.Hidden;
+            Radius.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -51,6 +74,10 @@ namespace oop_lab3
         /// <param name="e">Информация о состоянии кнопки</param>
         private void Button_Calc(object sender, RoutedEventArgs e)
         {
+            HeightOfShape.Text = HeightOfShape.Text.Replace('.', ',');
+            Radius.Text = Radius.Text.Replace('.', ',');
+            Square.Text = Square.Text.Replace('.', ',');
+
             try
             {
                 if (PyramidCheck.IsChecked == true)
@@ -102,12 +129,8 @@ namespace oop_lab3
         /// <param name="e">Информация о состоянии кнопки</param>
         private void PyramidCheck_Checked(object sender, RoutedEventArgs e)
         {
-            TextSquare.Visibility = Visibility.Visible;
-            Square.Visibility = Visibility.Visible;
-            TextHeight.Visibility = Visibility.Visible;
-            HeightOfShape.Visibility = Visibility.Visible;
-            TextRadius.Visibility = Visibility.Hidden;
-            Radius.Visibility = Visibility.Hidden;
+            TextBoxClean();
+            ShowActualTextBox();
         }
 
         /// <summary>
@@ -117,6 +140,8 @@ namespace oop_lab3
         /// <param name="e">Информация о состоянии кнопки</param>
         private void SphereChek_Checked(object sender, RoutedEventArgs e)
         {
+            TextBoxClean();
+
             TextSquare.Visibility = Visibility.Hidden;
             Square.Visibility = Visibility.Hidden;
             TextHeight.Visibility = Visibility.Hidden;
@@ -132,12 +157,8 @@ namespace oop_lab3
         /// <param name="e">Информация о состоянии кнопки</param>
         private void ParallelepipedCheck_Checked(object sender, RoutedEventArgs e)
         {
-            TextSquare.Visibility = Visibility.Visible;
-            Square.Visibility = Visibility.Visible;
-            TextHeight.Visibility = Visibility.Visible;
-            HeightOfShape.Visibility = Visibility.Visible;
-            TextRadius.Visibility = Visibility.Hidden;
-            Radius.Visibility = Visibility.Hidden;
+            TextBoxClean();
+            ShowActualTextBox();
         }
     }
 }
