@@ -18,7 +18,7 @@
         <StackPanel VerticalAlignment="Center">
             <RadioButton x:Name="PyramidCheck" Content="Пирамида" Checked="PyramidCheck_Checked"/>
             <RadioButton x:Name="SphereChek" Content="Шар" Checked="SphereChek_Checked"/>
-            <RadioButton x:Name="ParallCheck" Content="Параллелепипед" Checked="ParallCheck_Checked"/>
+            <RadioButton x:Name="ParallCheck" Content="Параллелепипед" Checked="ParallelepipedCheck_Checked"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
@@ -27,7 +27,7 @@
         </StackPanel>
         <StackPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">
             <TextBlock x:Name="TextHeight" Text="Высота" Visibility="Hidden"/>
-            <TextBox x:Name="Height" Height="20" Width="60" HorizontalAlignment="Left" Visibility="Hidden"/>
+            <TextBox x:Name="HeightOfShape" Height="20" Width="60" HorizontalAlignment="Left" Visibility="Hidden"/>
         </StackPanel>
         <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
             <TextBlock x:Name="TextRadius" Text="Радиус" Visibility="Hidden"/>

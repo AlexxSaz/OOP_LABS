@@ -29,6 +29,16 @@ namespace oop_lab3
             InitializeComponent();
         }
 
+        private void CheckForRightData()
+        {
+            if (!double.TryParse(HeightOfShape.Text, out double height) &&
+                !double.TryParse(Square.Text, out double square) ||
+                !double.TryParse(Radius.Text, out double radius))
+            {
+                throw new ArgumentException("Введите параметры фигур!");
+            }
+        }
+
         /// <summary>
         /// Расчет объема при нажатии
         /// </summary>
@@ -38,11 +48,13 @@ namespace oop_lab3
         {
             try
             {
+                CheckForRightData();
+
                 if (PyramidCheck.IsChecked == true)
                 {
-                    Pyramid pyramid = new Pyramid();
+                    var pyramid = new Pyramid();
 
-                    pyramid.Height = double.Parse(Height.Text);
+                    pyramid.Height = double.Parse(HeightOfShape.Text);
                     pyramid.SquareOfBase = double.Parse(Square.Text);
                     Answer.Text = pyramid.Volume.ToString();
                 }
@@ -57,9 +69,13 @@ namespace oop_lab3
                 {
                     var parall = new Parallelepiped();
 
-                    parall.Height = double.Parse(Height.Text);
+                    parall.Height = double.Parse(HeightOfShape.Text);
                     parall.SquareOfBase = double.Parse(Square.Text);
                     Answer.Text = parall.Volume.ToString();
+                }
+                else
+                {
+                    throw new ArgumentException("Выберите фигуру!");
                 }
             }
             catch (ArgumentException exception)
@@ -78,7 +94,7 @@ namespace oop_lab3
             TextSquare.Visibility = Visibility.Visible;
             Square.Visibility = Visibility.Visible;
             TextHeight.Visibility = Visibility.Visible;
-            Height.Visibility = Visibility.Visible;
+            HeightOfShape.Visibility = Visibility.Visible;
             TextRadius.Visibility = Visibility.Hidden;
             Radius.Visibility = Visibility.Hidden;
         }
@@ -93,7 +109,7 @@ namespace oop_lab3
             TextSquare.Visibility = Visibility.Hidden;
             Square.Visibility = Visibility.Hidden;
             TextHeight.Visibility = Visibility.Hidden;
-            Height.Visibility = Visibility.Hidden;
+            HeightOfShape.Visibility = Visibility.Hidden;
             TextRadius.Visibility = Visibility.Visible;
             Radius.Visibility = Visibility.Visible;
         }
@@ -108,7 +124,7 @@ namespace oop_lab3
             TextSquare.Visibility = Visibility.Visible;
             Square.Visibility = Visibility.Visible;
             TextHeight.Visibility = Visibility.Visible;
-            Height.Visibility = Visibility.Visible;
+            HeightOfShape.Visibility = Visibility.Visible;
             TextRadius.Visibility = Visibility.Hidden;
             Radius.Visibility = Visibility.Hidden;
         }
