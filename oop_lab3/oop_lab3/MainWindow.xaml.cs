@@ -29,13 +29,18 @@ namespace oop_lab3
             InitializeComponent();
         }
 
-        private void CheckForRightData()
+        /// <summary>
+        /// Проверка наличия чисел в TextBox
+        /// </summary>
+        private void CheckTextBoxData(string data)
         {
-            if (!double.TryParse(HeightOfShape.Text, out double height) &&
-                !double.TryParse(Square.Text, out double square) ||
-                !double.TryParse(Radius.Text, out double radius))
+            if (String.IsNullOrEmpty(data))
             {
-                throw new ArgumentException("Введите параметры фигур!");
+                throw new ArgumentException("Введите необходимые параметры!");
+            }
+            else if (!double.TryParse(data, out double doubleData))
+            {
+                throw new ArgumentException("Неверный формат ввода!");
             }
         }
 
@@ -48,10 +53,11 @@ namespace oop_lab3
         {
             try
             {
-                CheckForRightData();
-
                 if (PyramidCheck.IsChecked == true)
                 {
+                    CheckTextBoxData(HeightOfShape.Text);
+                    CheckTextBoxData(Square.Text);
+
                     var pyramid = new Pyramid();
 
                     pyramid.Height = double.Parse(HeightOfShape.Text);
@@ -60,6 +66,8 @@ namespace oop_lab3
                 }
                 else if (SphereChek.IsChecked == true)
                 {
+                    CheckTextBoxData(Radius.Text);
+
                     var sphere = new Sphere();
 
                     sphere.Radius = double.Parse(Radius.Text);
@@ -67,6 +75,9 @@ namespace oop_lab3
                 }
                 else if (ParallCheck.IsChecked == true)
                 {
+                    CheckTextBoxData(HeightOfShape.Text);
+                    CheckTextBoxData(Square.Text);
+
                     var parall = new Parallelepiped();
 
                     parall.Height = double.Parse(HeightOfShape.Text);
@@ -80,7 +91,7 @@ namespace oop_lab3
             }
             catch (ArgumentException exception)
             {
-                MessageBox.Show(exception.ToString());
+                MessageBox.Show(exception.Message);
             }
         }
 
