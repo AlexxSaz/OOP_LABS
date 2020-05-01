@@ -12,7 +12,7 @@ namespace oop_laba2
     /// </summary>
     public class Program
     {
-        /// <summary>
+        /// <summary>d
         /// Вывод информации о человеке в консоль
         /// </summary>
         /// <param name="personList">Список людей</param>
@@ -27,28 +27,24 @@ namespace oop_laba2
             }
         }
 
+        //TODO: Поправить на вывод информации в зависимости от типа
         /// <summary>
         /// Вывод структуры в консоль
         /// </summary>
-        public static void ShowStructure()
+        public static void ShowStructure(PersonBase person)
         {
-            Console.WriteLine("{0,-14} | {1,-14} | {2,-10} | {3,-10} " +
-                "| {4,-15} | {5, -13} | {6, -13}", "Имя", "Фамилия", "Возраст", "Пол",
-                "Состояние брака/", "Работа/", "Супруг/");
-            Console.WriteLine("{0,-14} {1,-14} {2,-10} {3,-17} " +
-                " {4,-18} {5, -14} {6, -13}", "", "", "", "",
-                "Состав семьи", "Детский сад", "Родители");
-        }
-
-        /// <summary>
-        /// Ввод данных в консоль
-        /// </summary>
-        /// <param name="data">Название вводимых данных</param>
-        /// <returns>Введенные данные</returns>
-        public static void MistakeOfInput(ArgumentException e)
-        {
-            Console.Clear();
-            Console.WriteLine(e.Message);
+            if (person.GetType() == typeof(Adult))
+            {
+                Console.WriteLine("{0,-14} | {1,-14} | {2,-10} | {3,-10} " +
+                "| {4,-16} | {5, -13} | {6, -13}", "Имя", "Фамилия",
+                "Возраст", "Пол", "Состояние брака", "Работа", "Супруг");
+            }
+            else if (person.GetType() == typeof(Child))
+            {
+                Console.WriteLine("{0,-14} | {1,-14} | {2,-10} | {3,-10} " +
+                "| {4,-16} | {5, -13} | {6, -13}", "Имя", "Фамилия",
+                "Возраст", "Пол", "Состав семьи", "Детский сад", "Родители");
+            }
         }
 
         /// <summary>
@@ -60,6 +56,8 @@ namespace oop_laba2
             Console.WindowWidth = 123;
 
             var personList = new PersonList();
+            var childList = new PersonList();
+            var adultList = new PersonList();
 
             var random = new Random();
 
@@ -71,17 +69,24 @@ namespace oop_laba2
                 {
                     case 1:
                         personList.Add(AnyRandom.GetRandomAdult());
+                        adultList.Add(personList.Person[i]);
                         break;
                     case 2:
                         personList.Add(AnyRandom.GetRandomChild());
+                        childList.Add(personList.Person[i]);
                         break;
                 }
             }
 
-            ShowStructure();
-            ShowInfo(personList);
+            ShowStructure(childList.Person[0]);
+            ShowInfo(childList);
 
-            Console.WriteLine("Нажмите любую, чтобы узнать " +
+            Console.WriteLine();
+
+            ShowStructure(adultList.Person[0]);
+            ShowInfo(adultList);
+
+            Console.WriteLine("Нажмите любую клавишу, чтобы узнать " +
                 "тип четвертого человека");
 
             Console.ReadKey();
@@ -91,7 +96,7 @@ namespace oop_laba2
             Console.Write(personList.Person[3].GetType().ToString() + "\n");
             Console.ResetColor();
             Console.WriteLine("Вот его данные: ");
-            ShowStructure();
+            ShowStructure(personList.Person[3]);
             Console.WriteLine(personList.Person[3].Information);
             Console.WriteLine();
             Console.WriteLine("Для завершения программы нажмите " +
