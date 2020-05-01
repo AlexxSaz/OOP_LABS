@@ -12,11 +12,6 @@ namespace PersonLibrary
     public class Child : PersonBase
     {
         /// <summary>
-        /// Состав семьи
-        /// </summary>
-        private string _stateOfFamily;
-
-        /// <summary>
         /// Родители
         /// </summary>
         private Adult[] _parents = new Adult[2];
@@ -26,21 +21,11 @@ namespace PersonLibrary
         /// </summary>
         private string _nameOfGarden;
 
+        //TODO: Перечисление
         /// <summary>
         /// Состав семьи
         /// </summary>
-        public string StateOfFamily
-        {
-            get
-            {
-                return _stateOfFamily;
-            }
-            set
-            {
-                CheckStringData(value);
-                _stateOfFamily = value;
-            }
-        }
+        public StateOfFamily StateOfFamily { get; set; }
 
         /// <summary>
         /// Родители ребенка
@@ -113,7 +98,7 @@ namespace PersonLibrary
                 string dopInfo = "-";
                 switch (StateOfFamily)
                 {
-                    case "TwoParents":
+                    case StateOfFamily.TwoParents:
                         Parents[0] = (Adult)AnyRandom.GetRandomAdult(Gender.Male);
                         Parents[1] = (Adult)AnyRandom.GetRandomAdult(Gender.Female);
                         dopInfo = string.Format("{0,-13} \n {1,-93} {2,-13}", Parents[0].Name + " " +
@@ -121,7 +106,7 @@ namespace PersonLibrary
                              Parents[1].Name + " " + Parents[1].Surname +
                             " " + Parents[1].Age);
                         break;
-                    case "OneParent":
+                    case StateOfFamily.OneParent:
                         Parents[0] = (Adult)AnyRandom.GetRandomAdult();
                         dopInfo = Parents[0].Name + " " +
                             Parents[0].Surname + " " + Parents[0].Age;
