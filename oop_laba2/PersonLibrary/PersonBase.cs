@@ -19,7 +19,6 @@ namespace PersonLibrary
         /// <param name="data">Проверяемое значение</param>
         protected static void CheckStringData(string data)
         {
-            //TODO Внутри методов не нужны XML комментарии, достаточно обычных (V)
             Regex regex =
                 new Regex(@"(^[а-яa-z]+$)|(^[а-яa-z]+[-][а-яa-z]+$)");
 
@@ -49,7 +48,6 @@ namespace PersonLibrary
             return name;
         }
 
-        //TODO Сигнатура XML комментария и метода различны (V)
         /// <summary>
         /// Изменение формата данных о человеке
         /// </summary>
@@ -158,7 +156,6 @@ namespace PersonLibrary
         /// </summary>
         public Gender Gender { get; set; }
 
-        //TODO: Публичные конструкторы в абстрактном классе не имеют смысла (V)
         /// <summary>
         /// Содержит стандартные данные человека
         /// </summary>
@@ -168,7 +165,6 @@ namespace PersonLibrary
         /// Содержит имя, фамилию, возраст и пол 
         /// </summary>
         /// <param name="name">имя</param>
-        /// //TODO: RSDN (V)
         /// <param name="surname">фамилия</param>
         /// <param name="old">возраст</param>
         /// <param name="gender">пол</param>

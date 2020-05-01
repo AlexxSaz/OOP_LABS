@@ -52,8 +52,6 @@ namespace PersonLibrary
         {
             switch (gender)
             {
-                //TODO: Дублируется формирование строки - Resources можно сохранить в константе или отдельном методе, (V)
-                //TODO: туда передавать строку с названием файла а из метода возвращать уже полную строку (V)
                 case Gender.Male:
                     person.Name = TextReader("MaleFirstNames.txt");
                     person.Surname = TextReader("MaleLastNames.txt");
@@ -71,7 +69,6 @@ namespace PersonLibrary
             }
         }
 
-        //TODO: Дублируется с GetRandomChild (V)
         /// <summary>
         /// Возвращает случайные данные взрослого определенного пола
         /// </summary>
@@ -108,12 +105,13 @@ namespace PersonLibrary
         {
             int randAge = _random.Next(0, 18);
             int randGender = _random.Next(0, 2);
+            int randStateOfFamily = _random.Next(0, 3);
 
             var child = new Child();
 
             GetBaseInfo(child, (Gender)randGender, randAge);
 
-            child.StateOfFamily = TextReader("StateOfFamily.txt");
+            child.StateOfFamily = (StateOfFamily)randStateOfFamily;
             child.NameOfGarden = TextReader("NameOfGarden.txt");
             return child;
         }

@@ -11,8 +11,6 @@ namespace PersonLibrary
     /// </summary>
     public class Adult : PersonBase
     {
-        //TODO: В автосвойство (V)
-
         /// <summary>
         /// Серия и номер паспорт
         /// </summary>
@@ -134,7 +132,7 @@ namespace PersonLibrary
                             Partner = (Adult)AnyRandom.GetRandomAdult(Gender.Male);
                             break;
                     }
-                    string dopinfo = Partner.Name + " " + Partner.Surname + 
+                    string dopinfo = Partner.Name + " " + Partner.Surname +
                         " " + Partner.Age;
 
                     info = info + string.Format(" | {0, -13}", dopinfo);

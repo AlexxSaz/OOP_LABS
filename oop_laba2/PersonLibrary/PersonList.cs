@@ -45,7 +45,6 @@ namespace PersonLibrary
         /// <param name="person">Данные человека</param>
         public void Add(PersonBase person)
         {
-            //TODO: RSDN - именование (V)
             PersonBase[] newPerson = Person;
             Person = new PersonBase[Person.Length + 1];
 
@@ -78,7 +77,6 @@ namespace PersonLibrary
         public void RemoveAt(int index)
         {
             CheckZeroLength();
-            //TODO: RSDN - именование (V)
             PersonBase[] newPerson = Person;
             Person = new PersonBase[Person.Length - 1];
             int changeIndex = 0;
