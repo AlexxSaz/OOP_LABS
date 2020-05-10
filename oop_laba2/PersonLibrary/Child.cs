@@ -21,7 +21,6 @@ namespace PersonLibrary
         /// </summary>
         private string _nameOfGarden;
 
-        //TODO: Перечисление
         /// <summary>
         /// Состав семьи
         /// </summary>
