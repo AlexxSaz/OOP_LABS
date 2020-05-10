@@ -9,7 +9,7 @@ namespace ShapeLib
     /// <summary>
     /// Параллелепипед
     /// </summary>
-    public class Parallelepiped : Shape
+    public class Parallelepiped : ShapeBase
     {
         /// <summary>
         /// Высота
@@ -34,6 +34,7 @@ namespace ShapeLib
             {
                 CheckData(value);
                 _height = value;
+                OnPropertyChanged(nameof(Height));
             }
         }
 
@@ -50,6 +51,7 @@ namespace ShapeLib
             {
                 CheckData(value);
                 _squareOfBase = value;
+                OnPropertyChanged(nameof(SquareOfBase));
             }
         }
 

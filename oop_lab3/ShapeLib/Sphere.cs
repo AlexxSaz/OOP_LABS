@@ -9,7 +9,7 @@ namespace ShapeLib
     /// <summary>
     /// Сфера
     /// </summary>
-    public class Sphere : Shape
+    public class Sphere : ShapeBase
     {
         /// <summary>
         /// Радиус сферы
@@ -29,6 +29,7 @@ namespace ShapeLib
             {
                 CheckData(value);
                 _radius = value;
+                OnPropertyChanged(nameof(Radius));
             }
         }
 

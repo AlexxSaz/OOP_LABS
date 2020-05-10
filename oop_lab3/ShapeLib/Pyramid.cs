@@ -9,7 +9,7 @@ namespace ShapeLib
     /// <summary>
     /// Пирамида
     /// </summary>
-    public class Pyramid : Shape
+    public class Pyramid : ShapeBase
     {
         /// <summary>
         /// Высота
