@@ -27,7 +27,7 @@ namespace oop_laba2
             }
         }
 
-        //TODO: Поправить на вывод информации в зависимости от типа
+
         /// <summary>
         /// Вывод структуры в консоль
         /// </summary>
@@ -91,17 +91,23 @@ namespace oop_laba2
 
             Console.ReadKey();
             Console.Clear();
-            Console.Write("Тип четвертого человека в списке: ");
+            Console.WriteLine("Тип четвертого человека в списке: ");
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(personList.Person[3].GetType().ToString() + "\n");
+            if (personList.Person[3].GetType() == typeof(Adult))
+            {
+                var adult = (Adult)personList.Person[3];
+                Console.WriteLine($"Взрослый {adult.Name} {adult.Surname}," +
+                    $" который работает {adult.NameOfJob}");
+            }
+            else if (personList.Person[3].GetType() == typeof(Child))
+            {
+                var child = (Child)personList.Person[3];
+                Console.WriteLine($"Ребенок {child.Name} {child.Surname}," +
+                    $"состояние семьи которого {child.StateOfFamily}");
+            }
             Console.ResetColor();
-            Console.WriteLine("Вот его данные: ");
-            ShowStructure(personList.Person[3]);
-            Console.WriteLine(personList.Person[3].Information);
-            Console.WriteLine();
-            Console.WriteLine("Для завершения программы нажмите " +
-                "любую кнопку");
-
+            //TODO: Показать приведение типа с вызовоспецифичного для этого типа метода или лсвойства
+            Console.WriteLine("\nНажите любую клавишу для выходы из программы.");
             Console.ReadKey();
         }
     }
