@@ -27,8 +27,10 @@ namespace ShapeLib
             }
             set
             {
-                CheckData(value);
-                _radius = value;
+                if (value > 0)
+                {
+                    _radius = value;
+                }
                 RaisePropertyChanged(nameof(Radius));
             }
         }

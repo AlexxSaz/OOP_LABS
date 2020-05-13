@@ -32,8 +32,10 @@ namespace ShapeLib
             }
             set
             {
-                CheckData(value);
-                _height = value;
+                if (value > 0)
+                {
+                    _height = value;
+                }
                 RaisePropertyChanged(nameof(Height));
             }
         }
@@ -49,8 +51,10 @@ namespace ShapeLib
             }
             set
             {
-                CheckData(value);
-                _squareOfBase = value;
+                if (value > 0)
+                {
+                    _squareOfBase = value;
+                }
                 RaisePropertyChanged(nameof(SquareOfBase));
             }
         }
