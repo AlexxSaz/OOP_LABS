@@ -24,29 +24,47 @@ namespace oop_lab3.ViewModel
             set
             {
                 _selectedShape = value;
+                Volume = 0;
                 RaisePropertyChanged(nameof(SelectedShape));
+                RaisePropertyChanged(nameof(Volume));
             }
         }
 
-        public double Volume { get; set; }
+        public double Volume
+        {
+            get => _volume;
+            private set
+            {
+                _volume = value;
+                RaisePropertyChanged(nameof(Volume));
+            }
+        }
+
 
         public ShapesViewModel()
         {
-            SelectedShape = new Parallelepiped();
-            SelectedShape.PropertyChanged += (s, e) => { RaisePropertyChanged(e.PropertyName); };
-            Shapes = new ObservableCollection<ShapeBase>
+           Shapes = new ObservableCollection<ShapeBase>
             {
-                new Parallelepiped {NameOfShape=nameof(Parallelepiped)},
-                new Sphere {NameOfShape=nameof(Sphere)},
-                new Pyramid {NameOfShape=nameof(Pyramid)}
+                new Parallelepiped {NameOfShape="Параллелепипед"},
+                new Sphere {NameOfShape="Сфера"},
+                new Pyramid {NameOfShape="Пирамида"}
             };
-            CalcVolume = new DelegateCommand(() => { ExecuteCalc(); }).ObservesProperty(() => Volume);
+
+            CalcVolume = new DelegateCommand(() => 
+            { ExecuteCalc(); }).ObservesProperty(() => Volume);
         }
 
         private void ExecuteCalc()
         {
-            Volume = SelectedShape.Volume;
-            RaisePropertyChanged(nameof(Volume));
+            if (SelectedShape != null)
+            {
+                Volume = SelectedShape.Volume;
+            }
+            else
+            {
+                MessageBox.Show("Не выбрана ни одна из фигур!\n" +
+                    "Выберите фигуру.");
+            }
         }
 
         public DelegateCommand CalcVolume { get; }
