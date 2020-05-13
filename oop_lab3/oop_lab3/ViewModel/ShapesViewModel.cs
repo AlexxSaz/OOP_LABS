@@ -13,11 +13,29 @@ using System.Windows.Input;
 
 namespace oop_lab3.ViewModel
 {
+    /// <summary>
+    /// Связь между моделью и представлением
+    /// </summary>
     public class ShapesViewModel : BindableBase
     {
-        public ObservableCollection<ShapeBase> Shapes { get; set; }
+        /// <summary>
+        /// ВЫбранная фигура
+        /// </summary>
         private ShapeBase _selectedShape;
+
+        /// <summary>
+        /// Объем фигуры
+        /// </summary>
         private double _volume;
+
+        /// <summary>
+        /// Набор рассматриваемых фигур
+        /// </summary>
+        public ObservableCollection<ShapeBase> Shapes { get; set; }
+        
+        /// <summary>
+        /// Выбранная фигура
+        /// </summary>
         public ShapeBase SelectedShape
         {
             get => _selectedShape;
@@ -30,6 +48,9 @@ namespace oop_lab3.ViewModel
             }
         }
 
+        /// <summary>
+        /// Объем фигуры
+        /// </summary>
         public double Volume
         {
             get => _volume;
@@ -40,7 +61,9 @@ namespace oop_lab3.ViewModel
             }
         }
 
-
+        /// <summary>
+        /// Инициализация фигур
+        /// </summary>
         public ShapesViewModel()
         {
            Shapes = new ObservableCollection<ShapeBase>
@@ -54,6 +77,9 @@ namespace oop_lab3.ViewModel
             { ExecuteCalc(); }).ObservesProperty(() => Volume);
         }
 
+        /// <summary>
+        /// Получение значения объема фигуры
+        /// </summary>
         private void ExecuteCalc()
         {
             if (SelectedShape != null)
@@ -67,6 +93,9 @@ namespace oop_lab3.ViewModel
             }
         }
 
+        /// <summary>
+        /// Команда для расчета объема фигуры
+        /// </summary>
         public DelegateCommand CalcVolume { get; }
     }
 }

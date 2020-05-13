@@ -13,8 +13,14 @@ namespace ShapeLib
     /// </summary>
     public abstract class ShapeBase : BindableBase
     {
+        /// <summary>
+        /// Имя фигуры
+        /// </summary>
         private string _nameOfShape;
 
+        /// <summary>
+        /// Название фигуры
+        /// </summary>
         public string NameOfShape
         {
             get => _nameOfShape;
@@ -24,7 +30,6 @@ namespace ShapeLib
             }
         }
 
-        //TODO: Не имеет смысла virtual (V)
         /// <summary>
         /// Расчет объема фигуры
         /// </summary>
