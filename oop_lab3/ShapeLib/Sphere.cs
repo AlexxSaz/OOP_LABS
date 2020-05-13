@@ -29,7 +29,7 @@ namespace ShapeLib
             {
                 CheckData(value);
                 _radius = value;
-                OnPropertyChanged(nameof(Radius));
+                RaisePropertyChanged(nameof(Radius));
             }
         }
 

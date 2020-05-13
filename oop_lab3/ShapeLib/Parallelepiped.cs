@@ -34,7 +34,7 @@ namespace ShapeLib
             {
                 CheckData(value);
                 _height = value;
-                OnPropertyChanged(nameof(Height));
+                RaisePropertyChanged(nameof(Height));
             }
         }
 
@@ -51,7 +51,7 @@ namespace ShapeLib
             {
                 CheckData(value);
                 _squareOfBase = value;
-                OnPropertyChanged(nameof(SquareOfBase));
+                RaisePropertyChanged(nameof(SquareOfBase));
             }
         }
 

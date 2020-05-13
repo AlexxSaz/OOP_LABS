@@ -11,7 +11,7 @@ namespace ShapeLib
     /// <summary>
     /// Геометрические фигуры
     /// </summary>
-    public abstract class ShapeBase
+    public abstract class ShapeBase : BindableBase
     {
         private string _nameOfShape;
 
