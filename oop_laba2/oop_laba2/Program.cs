@@ -93,20 +93,24 @@ namespace oop_laba2
             Console.Clear();
             Console.WriteLine("Тип четвертого человека в списке: ");
             Console.ForegroundColor = ConsoleColor.Red;
-            if (personList.Person[3].GetType() == typeof(Adult))
+
+            switch (personList.Person[3])
             {
-                var adult = (Adult)personList.Person[3];
-                Console.WriteLine($"Взрослый {adult.Name} {adult.Surname}," +
-                    $" который работает {adult.NameOfJob}");
+                case Adult adult:
+                {
+                    Console.WriteLine($"Взрослый {adult.Name} {adult.Surname}," +
+                                      $" который работает {adult.NameOfJob}");
+                    break;
+                }
+                case Child child:
+                {
+                    Console.WriteLine($"Ребенок {child.Name} {child.Surname}," +
+                                      $"состояние семьи которого {child.StateOfFamily}");
+                    break;
+                }
             }
-            else if (personList.Person[3].GetType() == typeof(Child))
-            {
-                var child = (Child)personList.Person[3];
-                Console.WriteLine($"Ребенок {child.Name} {child.Surname}," +
-                    $"состояние семьи которого {child.StateOfFamily}");
-            }
+
             Console.ResetColor();
-            //TODO: Показать приведение типа с вызовоспецифичного для этого типа метода или лсвойства
             Console.WriteLine("\nНажите любую клавишу для выходы из программы.");
             Console.ReadKey();
         }
