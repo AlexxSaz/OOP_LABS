@@ -34,25 +34,5 @@ namespace ShapeLib
         /// Расчет объема фигуры
         /// </summary>
         public abstract double Volume { get; }
-
-        /// <summary>
-        /// Проверка правильности введенных данных
-        /// </summary>
-        /// <param name="data">Введенные данные</param>
-        protected static void CheckData(double data)
-        {
-            if (double.IsNaN(data))
-            {
-                throw new ArgumentException(
-                    string.Format("***Это не число***\nВведите число!",
-                    nameof(data)));
-            }
-            else if (data < 0)
-            {
-                throw new ArgumentException(
-                    string.Format("***Это число отрицаетльное***\n" +
-                    "Введите число не меньше нуля!", nameof(data)));
-            }
-        }
     }
 }
