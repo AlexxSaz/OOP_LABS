@@ -10,6 +10,7 @@ using Prism.Mvvm;
 using Prism.Commands;
 using Prism.Common;
 using System.Windows.Input;
+using System.Windows.Controls;
 
 namespace oop_lab3.ViewModel
 {
@@ -29,10 +30,25 @@ namespace oop_lab3.ViewModel
         private double _volume;
 
         /// <summary>
+        /// Отображение параметра радиус
+        /// </summary>
+        private bool _radiusVisability = false;
+
+        /// <summary>
+        /// Отображение параметра высота
+        /// </summary>
+        private bool _heightVisability = false;
+
+        /// <summary>
+        /// Отображение параметра площадь основания
+        /// </summary>
+        private bool _squareVisability = false;
+
+        /// <summary>
         /// Набор рассматриваемых фигур
         /// </summary>
         public ObservableCollection<ShapeBase> Shapes { get; set; }
-        
+
         /// <summary>
         /// Выбранная фигура
         /// </summary>
@@ -43,8 +59,29 @@ namespace oop_lab3.ViewModel
             {
                 _selectedShape = value;
                 Volume = 0;
+
+                switch (SelectedShape)
+                {
+                    case Sphere sphere:
+                        RadiusVisability = true;
+                        HeightVisability = false;
+                        SquareVisability = false;
+                        break;
+                    case Parallelepiped parallelepiped:
+                        RadiusVisability = false;
+                        HeightVisability = true;
+                        SquareVisability = true;
+                        break;
+                    case Pyramid pyramid:
+                        RadiusVisability = false;
+                        HeightVisability = true;
+                        SquareVisability = true;
+                        break;
+                    case null:
+                        break;
+                }
+
                 RaisePropertyChanged(nameof(SelectedShape));
-                RaisePropertyChanged(nameof(Volume));
             }
         }
 
@@ -54,7 +91,7 @@ namespace oop_lab3.ViewModel
         public double Volume
         {
             get => _volume;
-            private set
+            set
             {
                 _volume = value;
                 RaisePropertyChanged(nameof(Volume));
@@ -62,19 +99,42 @@ namespace oop_lab3.ViewModel
         }
 
         /// <summary>
-        /// Инициализация фигур
+        /// Отображение параметра радиус
         /// </summary>
-        public ShapesViewModel()
+        public bool RadiusVisability
         {
-           Shapes = new ObservableCollection<ShapeBase>
+            get => _radiusVisability;
+            set
             {
-                new Parallelepiped {NameOfShape="Параллелепипед"},
-                new Sphere {NameOfShape="Сфера"},
-                new Pyramid {NameOfShape="Пирамида"}
-            };
+                _radiusVisability = value;
+                RaisePropertyChanged(nameof(RadiusVisability));
+            }
+        }
 
-            CalcVolume = new DelegateCommand(() => 
-            { ExecuteCalc(); }).ObservesProperty(() => Volume);
+        /// <summary>
+        /// Отображение параметра высота
+        /// </summary>
+        public bool HeightVisability
+        {
+            get => _heightVisability;
+            set
+            {
+                _heightVisability = value;
+                RaisePropertyChanged(nameof(HeightVisability));
+            }
+        }
+
+        /// <summary>
+        /// Отображение параметра площадь основания
+        /// </summary>
+        public bool SquareVisability
+        {
+            get => _squareVisability;
+            set
+            {
+                _squareVisability = value;
+                RaisePropertyChanged(nameof(SquareVisability));
+            }
         }
 
         /// <summary>
@@ -97,5 +157,21 @@ namespace oop_lab3.ViewModel
         /// Команда для расчета объема фигуры
         /// </summary>
         public DelegateCommand CalcVolume { get; }
+
+        /// <summary>
+        /// Инициализация фигур
+        /// </summary>
+        public ShapesViewModel()
+        {
+            Shapes = new ObservableCollection<ShapeBase>
+            {
+                new Parallelepiped {NameOfShape="Параллелепипед"},
+                new Sphere {NameOfShape="Сфера"},
+                new Pyramid {NameOfShape="Пирамида"}
+            };
+
+            CalcVolume = new DelegateCommand(() =>
+             { ExecuteCalc(); }).ObservesProperty(() => Volume);
+        }
     }
 }
