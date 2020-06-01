@@ -6,18 +6,10 @@
         xmlns:local="clr-namespace:oop_lab3" 
         xmlns:viewmodel="clr-namespace:oop_lab3.ViewModel"
         mc:Ignorable="d"
-        Title="Расчет объема фигуры" Height="220" Width="525"
-        MinHeight="210" MinWidth="262">
-    
+        Title="Расчет объема фигуры" Height="161" Width="220"
+        MinHeight="170" MinWidth="200" SizeToContent="WidthAndHeight">
+
     <Window.Resources>
-        <SolidColorBrush 
-            x:Key="{x:Static
-            SystemColors.InactiveSelectionHighlightBrushKey}"
-                         Color="#FF309AFF"/>
-        <SolidColorBrush
-            x:Key="{x:Static
-            SystemColors.InactiveSelectionHighlightTextBrushKey}"
-            Color="White"/>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" x:Key="brush">
             <GradientStop Offset="0" Color="LightGray"/>
             <GradientStop Offset="0.3333" Color="White"/>
@@ -29,36 +21,19 @@
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Margin" Value="8"/>
-            <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="TextAlignment" Value="Center"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
-        <Style TargetType="ListBox">
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="Transparent"/>
-        </Style>
-        <Style TargetType="ListBoxItem">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Background" Value="LightBlue"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="Black"/>
-            <Style.Triggers>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="BorderThickness" Value="1"/>
-                    <Setter Property="BorderBrush" Value="Black"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Margin" Value="5"/>
-            <Setter Property="DataContext" Value="{Binding SelectedShape}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
         </Style>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Window.Resources>
 
     <Window.DataContext>
@@ -66,41 +41,42 @@
     </Window.DataContext>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="0.7*"/>
-            <ColumnDefinition Width="0.8*"/>
-        </Grid.ColumnDefinitions>
-
         <StackPanel>
-            <ListBox Grid.Column="0" Grid.Row="0"
+            <ComboBox Grid.Column="0" Grid.Row="0"
                      ItemsSource="{Binding Shapes}"
                      SelectedItem="{Binding SelectedShape}">
-                <ListBox.ItemTemplate>
+                <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="5">
                             <TextBlock FontSize="18"
                                        Text="{Binding Path=NameOfShape}"/>
                         </StackPanel>
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" HorizontalAlignment="Right">
-            <TextBlock Text="Площадь основания"/>
-            <TextBlock Text="Высота"/>
-            <TextBlock Text="Радиус"/>
-            <TextBlock Grid.Column="1" Text="Объем"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2">
-            <TextBox Text="{Binding SquareOfBase}"/>
-            <TextBox Text="{Binding Height}"/>
-            <TextBox Text="{Binding Radius}"/>
-            <TextBlock x:Name="Answer" Grid.Column="1" Grid.Row="1"
-                       Text="{Binding Volume}" TextAlignment="Left"/>
-            <Button Grid.Column="2" Content="Расчет объема"
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Text="Площадь основания"
+                       Visibility="{Binding Path=SquareVisability,
+                Converter={StaticResource BoolToVis}}"/>
+            <TextBox Text="{Binding Path=SelectedShape.SquareOfBase}"
+                     Visibility="{Binding Path=SquareVisability,
+                Converter={StaticResource BoolToVis}}"/>
+            <TextBlock Text="Высота"
+                       Visibility="{Binding Path=HeightVisability,
+                Converter={StaticResource BoolToVis}}"/>
+            <TextBox Text="{Binding Path=SelectedShape.Height}"
+                     Visibility="{Binding Path=HeightVisability,
+                Converter={StaticResource BoolToVis}}"/>
+            <TextBlock Text="Радиус" 
+                       Visibility="{Binding Path=RadiusVisability,
+                Converter={StaticResource BoolToVis}}"/>
+            <TextBox Text="{Binding Path=SelectedShape.Radius}"
+                     Visibility="{Binding Path=RadiusVisability,
+                Converter={StaticResource BoolToVis}}"/>
+            <TextBlock Text="Объем"/>
+            <TextBlock x:Name="Answer" 
+                       Text="{Binding Volume}"
+                       Background="White"/>
+            <Button Content="Расчет объема"
                     Command="{Binding CalcVolume}" 
                     VerticalAlignment="Bottom"/>
         </StackPanel>
