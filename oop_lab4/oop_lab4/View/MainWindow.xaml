@@ -1,0 +1,72 @@
+﻿<Window x:Class="oop_lab4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:oop_lab4"
+        xmlns:viewmodel="clr-namespace:oop_lab4.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="320" Width="520"
+        MinHeight="270" MinWidth="400" SizeToContent="WidthAndHeight">
+
+    <Window.Resources>
+        <Style TargetType="ToggleButton">
+            <Setter Property="Focusable" Value="False"/>
+        </Style>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <viewmodel:ShapeVM/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ToolBar>
+            <ToggleButton ToolTip="Добавить фигуру" Command="{Binding AddShape}">
+                <Image Source="/Images/add.ico"/>
+            </ToggleButton>
+            <Separator/>
+            <ToggleButton ToolTip="Удалить фигуру">
+                <Image Source="/Images/delete.ico"/>
+            </ToggleButton>
+        </ToolBar>
+        
+        <GroupBox Header="Фигуры" Padding="5" Grid.Row="1">
+
+            <StackPanel>
+
+                <ListView ItemsSource="{Binding Shapes}"
+                          SelectedItem="{Binding SelectedShape}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn
+                                DisplayMemberBinding=
+                                "{Binding NameOfShape}"
+                                Header="Название"/>
+                            <GridViewColumn
+                                DisplayMemberBinding=
+                                "{Binding Height}"
+                                Header="Высота"/>
+                            <GridViewColumn
+                                DisplayMemberBinding=
+                                "{Binding SquareOfBase}"
+                                Header="Полщадь основания"/>
+                            <GridViewColumn
+                                DisplayMemberBinding=
+                                "{Binding Radius}"
+                                Header="Радиус"/>
+                            <GridViewColumn
+                                DisplayMemberBinding=
+                                "{Binding Volume}"
+                                Header="Объем"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>
