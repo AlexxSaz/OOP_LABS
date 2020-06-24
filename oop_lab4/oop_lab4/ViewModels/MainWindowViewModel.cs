@@ -3,25 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Prism.Mvvm;
-using Prism.Commands;
 using ShapeLib;
 using System.Collections.ObjectModel;
-using oop_lab4.View;
+using oop_lab4.Views;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 
-namespace oop_lab4.ViewModel
+namespace oop_lab4.ViewModels
 {
-    public class ShapeVM : BindableBase
+    public class MainWindowViewModel : ObservableObject
     {
+
         /// <summary>
         /// ВЫбранная фигура
         /// </summary>
         private ShapeBase _selectedShape;
-
-        /// <summary>
-        /// Объем фигуры
-        /// </summary>
-        private double _volume;
 
         /// <summary>
         /// Набор рассматриваемых фигур
@@ -37,38 +34,55 @@ namespace oop_lab4.ViewModel
             set
             {
                 _selectedShape = value;
-                
+
                 RaisePropertyChanged(nameof(SelectedShape));
             }
         }
 
         public AddWindow AddWindow { get; set; }
 
-        private ShapeBase Add()
+        private void ShowAddWindow()
         {
-            AddWindow = new AddWindow();
-            AddWindow.Show();
-            return new Parallelepiped();
+            if (AddWindow == null)
+            {
+                AddWindow = new AddWindow();
+            }
+
+            if (AddWindow.IsActive == false)
+            {
+                AddWindow.Show();
+            }
+        }
+
+        private void ShapeRemove()
+        {
+            Shapes.Remove(SelectedShape);
         }
 
         /// <summary>
         /// Команда добавление фигуры в список
         /// </summary>
-        public DelegateCommand AddShape { get; }
+        public RelayCommand ShowAddWindowCommand { get; }
 
         /// <summary>
         /// Команда для удаления фигуры из списка
         /// </summary>
-        public DelegateCommand RemoveShape { get; }
+        public RelayCommand RemoveShapeCommand { get; }
 
-        public ShapeVM()
+        public MainWindowViewModel()
         {
             Shapes = new ObservableCollection<ShapeBase> { };
 
 
+            Messenger.Default.Register<ShapeBase>(this, ShapeReceived);
 
-            AddShape = new DelegateCommand(() => { Add(); }).ObservesProperty(() => AddWindow);
+            ShowAddWindowCommand = new RelayCommand(ShowAddWindow);
+            RemoveShapeCommand = new RelayCommand(ShapeRemove);
         }
 
+        private void ShapeReceived(ShapeBase shape)
+        {
+            Shapes.Add(shape);
+        }
     }
 }

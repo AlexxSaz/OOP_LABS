@@ -1,10 +1,12 @@
-﻿<Window x:Class="oop_lab4.View.AddWindow"
+﻿<Window x:Class="oop_lab4.Views.AddWindow"
+        x:Name="AddingWin"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:oop_lab4.View"
-        xmlns:viewmodel="clr-namespace:oop_lab4.ViewModel"
+        xmlns:local="clr-namespace:oop_lab4.Views"
+        xmlns:vm="clr-namespace:oop_lab4.ViewModels"
         mc:Ignorable="d"
         Title="Расчет объема фигуры" Height="161" Width="220"
         MinHeight="170" MinWidth="200" SizeToContent="WidthAndHeight">
@@ -25,8 +27,10 @@
             <Setter Property="TextAlignment" Value="Center"/>
         </Style>
         <Style TargetType="Button">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Margin" Value="5"/>
+            <Style.Setters>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style.Setters>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="14"/>
@@ -37,10 +41,10 @@
     </Window.Resources>
 
     <Window.DataContext>
-        <viewmodel:AddVM/>
+        <vm:AddWindowViewModel/>
     </Window.DataContext>
 
-    <Grid>
+    <Grid >
         <StackPanel>
             <ComboBox Grid.Column="0" Grid.Row="0"
                      ItemsSource="{Binding Shapes}"
@@ -74,14 +78,31 @@
                 Converter={StaticResource BoolToVis}}"/>
             <TextBlock Text="Объем"/>
             <TextBlock x:Name="Answer" 
-                       Text="{Binding Volume}"
+                       Text="{Binding Path=SelectedShape.Volume}"
                        Background="White"/>
-            <Button Content="Добавить"
-                    Command="{Binding CalcVolume}"
-                    VerticalAlignment="Bottom"/>
+            <Button Content="Добавить" 
+                    Command="{Binding SendShapeCommand}"
+                    VerticalAlignment="Bottom">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:CallMethodAction MethodName="Hide"
+                                        TargetObject="{Binding
+                            RelativeSource={RelativeSource Mode=FindAncestor,
+                            AncestorType=Window}}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
             <Button Content="Отмена"
-                    Command="{Binding CalcVolume}" 
-                    VerticalAlignment="Bottom"/>
+                    VerticalAlignment="Bottom">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:CallMethodAction MethodName="Close"
+                                        TargetObject="{Binding
+                            RelativeSource={RelativeSource Mode=FindAncestor,
+                            AncestorType=Window}}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

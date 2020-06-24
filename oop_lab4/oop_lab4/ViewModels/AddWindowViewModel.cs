@@ -6,23 +6,30 @@ using System.ComponentModel;
 using ShapeLib;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
-using Prism.Mvvm;
-using Prism.Commands;
-using Prism.Common;
 using System.Windows.Input;
 using System.Windows.Controls;
+using oop_lab4.Views;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
+using GalaSoft.MvvmLight.Messaging;
 
-namespace oop_lab4.ViewModel
+namespace oop_lab4.ViewModels
 {
     /// <summary>
     /// Связь между моделью и представлением
     /// </summary>
-    public class AddVM : BindableBase
+    public class AddWindowViewModel : ObservableObject
     {
         /// <summary>
         /// ВЫбранная фигура
         /// </summary>
         private ShapeBase _selectedShape;
+
+        /// <summary>
+        /// Объем фигуры
+        /// </summary>
+        private double _volume;
 
         /// <summary>
         /// Отображение параметра радиус
@@ -119,19 +126,36 @@ namespace oop_lab4.ViewModel
         }
 
         /// <summary>
-        /// Команда для закрытия окна
+        /// Объем фигуры
         /// </summary>
-        public DelegateCommand CloseWindow { get; }
+        public double Volume
+        {
+            get => _volume;
+            set
+            {
+                _volume = value;
+                RaisePropertyChanged(nameof(Volume));
+            }
+        }
 
         /// <summary>
         /// Команда для расчета объема фигуры
         /// </summary>
-        public DelegateCommand Add { get; }
+        public RelayCommand SendShapeCommand { get; }
+
+        /// <summary>
+        /// Закрытие окна
+        /// </summary>
+        /// <param name="window"></param>
+        public void SendShape()
+        {
+            Messenger.Default.Send<ShapeBase>(SelectedShape);
+        }
 
         /// <summary>
         /// Инициализация фигур
         /// </summary>
-        public AddVM()
+        public AddWindowViewModel()
         {
             Shapes = new ObservableCollection<ShapeBase>
             {
@@ -139,6 +163,9 @@ namespace oop_lab4.ViewModel
                 new Sphere {NameOfShape="Сфера"},
                 new Pyramid {NameOfShape="Пирамида"}
             };
+
+
+            SendShapeCommand = new RelayCommand(SendShape);
         }
     }
 }

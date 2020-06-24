@@ -31,6 +31,7 @@ namespace ShapeLib
                 {
                     _radius = value;
                 }
+                RaisePropertyChanged(nameof(Volume));
                 RaisePropertyChanged(nameof(Radius));
             }
         }
@@ -42,7 +43,7 @@ namespace ShapeLib
         {
             get
             {
-                return Math.Round((4 / 3) * Math.PI * 
+                return Math.Round((4 / 3) * Math.PI *
                     Math.Pow(Radius, 3.0), 2);
             }
         }

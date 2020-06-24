@@ -36,6 +36,7 @@ namespace ShapeLib
                 {
                     _height = value;
                 }
+                RaisePropertyChanged(nameof(Volume));
                 RaisePropertyChanged(nameof(Height));
             }
         }
@@ -55,6 +56,7 @@ namespace ShapeLib
                 {
                     _squareOfBase = value;
                 }
+                RaisePropertyChanged(nameof(Volume));
                 RaisePropertyChanged(nameof(SquareOfBase));
             }
         }

@@ -10,10 +10,9 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace oop_lab4
+namespace oop_lab4.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

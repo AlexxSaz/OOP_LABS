@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Prism.Mvvm;
+using GalaSoft.MvvmLight;
 
 namespace ShapeLib
 {
@@ -11,7 +11,7 @@ namespace ShapeLib
     /// <summary>
     /// Геометрические фигуры
     /// </summary>
-    public abstract class ShapeBase : BindableBase
+    public abstract class ShapeBase : ObservableObject
     {
         /// <summary>
         /// Имя фигуры
