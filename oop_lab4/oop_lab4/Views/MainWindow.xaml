@@ -53,7 +53,7 @@
             </ToggleButton>
             <Separator/>
             <ToggleButton ToolTip="Сохранить"
-                          Command="{Binding }">
+                          Command="{Binding SaveShapeCollectionCommand}">
                 <Image Source="/Images/save.ico"/>
             </ToggleButton>
         </ToolBar>

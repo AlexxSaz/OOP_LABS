@@ -45,7 +45,9 @@
 
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <CheckBox IsChecked="{Binding IsShapeSelected}" VerticalAlignment="Center"/>
+                    <CheckBox IsChecked="{Binding IsShapeSelected}"
+                              VerticalAlignment="Center"
+                              ToolTip="Поиск по названию"/>
                     <ComboBox ItemsSource="{Binding ShapeForSearch}"
                      SelectedItem="{Binding SelectedShape}" Margin="5"
                           IsEnabled="{Binding IsShapeSelected}">
@@ -60,7 +62,9 @@
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <CheckBox IsChecked="{Binding IsVolumeEntered}" VerticalAlignment="Center"/>
+                    <CheckBox IsChecked="{Binding IsVolumeEntered}"
+                              VerticalAlignment="Center"
+                              ToolTip="Поиск по объему"/>
                     <StackPanel>
                         <TextBlock Text="Объем" HorizontalAlignment="Center"/>
                         <TextBox Text="{Binding Volume}"
