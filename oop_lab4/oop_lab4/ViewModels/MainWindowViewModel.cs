@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using ShapeLib;
 using System.Collections.ObjectModel;
 using oop_lab4.Views;
@@ -103,6 +104,12 @@ namespace oop_lab4.ViewModels
         /// </summary>
         public RelayCommand RandomizeShapeCommand { get; }
 #endif
+
+        /// <summary>
+        /// Команда для сохранения коллекции фигур
+        /// </summary>
+        public RelayCommand SaveShapeCollectionCommand { get; }
+
         /// <summary>
         /// Инициализация главного окна
         /// </summary>
@@ -117,9 +124,18 @@ namespace oop_lab4.ViewModels
             ShowSearchWindowCommand = new RelayCommand(() =>
             ShowWindow(SearchWindow));
             RemoveShapeCommand = new RelayCommand(ShapeRemove);
+            SaveShapeCollectionCommand = new RelayCommand(SaveShapeCollection);
 #if DEBUG
             RandomizeShapeCommand = new RelayCommand(ShapeRandomize);
 #endif
+        }
+
+        /// <summary>
+        /// Сохранение коллекции фигур
+        /// </summary>
+        private void SaveShapeCollection()
+        {
+            
         }
 #if DEBUG
         /// <summary>
