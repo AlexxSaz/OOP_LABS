@@ -9,9 +9,13 @@ using oop_lab4.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System.Windows;
 
 namespace oop_lab4.ViewModels
 {
+    /// <summary>
+    /// Реализация логики главного окна
+    /// </summary>
     public class MainWindowViewModel : ObservableObject
     {
 
@@ -39,47 +43,102 @@ namespace oop_lab4.ViewModels
             }
         }
 
-        public AddWindow AddWindow { get; set; }
+        /// <summary>
+        /// Окно добавления фигур
+        /// </summary>
+        public AddWindow AddWindow = new AddWindow();
 
-        private void ShowAddWindow()
+        /// <summary>
+        /// Окно поиска
+        /// </summary>
+        public SearchWindow SearchWindow = new SearchWindow();
+
+        /// <summary>
+        /// Вызов окон
+        /// </summary>
+        private void ShowWindow(Window win)
         {
-            if (AddWindow == null)
+            switch (win)
             {
-                AddWindow = new AddWindow();
+                case SearchWindow searchWindow:
+                    win = new SearchWindow();
+                    Messenger.Default.Send<ObservableCollection<ShapeBase>>(Shapes);
+                    break;
+                case AddWindow addWindow:
+                    win = new AddWindow();
+                    break;
             }
 
-            if (AddWindow.IsActive == false)
+            if (win.IsActive == false)
             {
-                AddWindow.Show();
+                win.Show();
             }
         }
 
+        /// <summary>
+        /// Удаление фигуры
+        /// </summary>
         private void ShapeRemove()
         {
             Shapes.Remove(SelectedShape);
         }
 
         /// <summary>
-        /// Команда добавление фигуры в список
+        /// Команда вызова окна с добавлением
         /// </summary>
         public RelayCommand ShowAddWindowCommand { get; }
+
+        /// <summary>
+        /// Команда вызова окна с поиском
+        /// </summary>
+        public RelayCommand ShowSearchWindowCommand { get; }
 
         /// <summary>
         /// Команда для удаления фигуры из списка
         /// </summary>
         public RelayCommand RemoveShapeCommand { get; }
-
+#if DEBUG
+        /// <summary>
+        /// Команда рандом фигур
+        /// </summary>
+        public RelayCommand RandomizeShapeCommand { get; }
+#endif
+        /// <summary>
+        /// Инициализация главного окна
+        /// </summary>
         public MainWindowViewModel()
         {
             Shapes = new ObservableCollection<ShapeBase> { };
 
-
             Messenger.Default.Register<ShapeBase>(this, ShapeReceived);
 
-            ShowAddWindowCommand = new RelayCommand(ShowAddWindow);
+            ShowAddWindowCommand = new RelayCommand(() =>
+            ShowWindow(AddWindow));
+            ShowSearchWindowCommand = new RelayCommand(() =>
+            ShowWindow(SearchWindow));
             RemoveShapeCommand = new RelayCommand(ShapeRemove);
+#if DEBUG
+            RandomizeShapeCommand = new RelayCommand(ShapeRandomize);
+#endif
         }
-
+#if DEBUG
+        /// <summary>
+        /// Добавление рандомных фигур
+        /// </summary>
+        private void ShapeRandomize()
+        {
+            int i;
+            for (i = 0; i < 10; i++)
+            {
+                Shapes.Add(ShapeRandom.GetRandomShape());
+            }
+            MessageBox.Show($"Зарандомлено {i} фигур");
+        }
+#endif
+        /// <summary>
+        /// Добавление новой фигуры
+        /// </summary>
+        /// <param name="shape">Созданная фигура</param>
         private void ShapeReceived(ShapeBase shape)
         {
             Shapes.Add(shape);
