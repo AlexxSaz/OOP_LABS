@@ -41,11 +41,16 @@
                 <mc:Choice Requires="debug">
                     <Separator/>
                     <ToggleButton ToolTip="Create Random Data"
-                          Command="{Binding }">
+                          Command="{Binding RandomizeShapeCommand}">
                         <Image Source="/Images/rand.ico"/>
                     </ToggleButton>
                 </mc:Choice>
             </mc:AlternateContent>
+            <Separator/>
+            <ToggleButton ToolTip="Поиск"
+                          Command="{Binding ShowSearchWindowCommand}">
+                <Image Source="/Images/search.ico"/>
+            </ToggleButton>
             <Separator/>
             <ToggleButton ToolTip="Сохранить"
                           Command="{Binding }">

@@ -76,10 +76,6 @@
             <TextBox Text="{Binding Path=SelectedShape.Radius}"
                      Visibility="{Binding Path=RadiusVisability,
                 Converter={StaticResource BoolToVis}}"/>
-            <TextBlock Text="Объем"/>
-            <TextBlock x:Name="Answer" 
-                       Text="{Binding Path=SelectedShape.Volume}"
-                       Background="White"/>
             <Button Content="Добавить" 
                     Command="{Binding SendShapeCommand}"
                     VerticalAlignment="Bottom">
