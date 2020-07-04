@@ -17,7 +17,7 @@ using GalaSoft.MvvmLight.Messaging;
 namespace oop_lab4.ViewModels
 {
     /// <summary>
-    /// Связь между моделью и представлением
+    /// Реализация логики окна с добавлением фигур
     /// </summary>
     public class AddWindowViewModel : ObservableObject
     {
@@ -153,7 +153,7 @@ namespace oop_lab4.ViewModels
         }
 
         /// <summary>
-        /// Инициализация фигур
+        /// Инициализация окна добавления фигур
         /// </summary>
         public AddWindowViewModel()
         {
