@@ -14,12 +14,12 @@ namespace ShapeLib
         /// <summary>
         /// Высота
         /// </summary>
-        private double _height;
+        private double _height = 1;
 
         /// <summary>
         /// Площадь основания
         /// </summary>
-        private double _squareOfBase;
+        private double _squareOfBase = 1;
 
         /// <summary>
         /// Высота параллелепипеда
@@ -69,6 +69,18 @@ namespace ShapeLib
             get
             {
                 return Math.Round(SquareOfBase * Height, 2);
+            }
+        }
+
+        /// <summary>
+        /// Параметры параллелепипеда
+        /// </summary>
+        public override string ParametersOfShape
+        {
+            get
+            {
+                return string.Format($"Высота={Height}\n" +
+                    $"Полщадь основания={SquareOfBase}");
             }
         }
     }

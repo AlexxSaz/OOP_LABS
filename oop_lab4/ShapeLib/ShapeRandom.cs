@@ -8,7 +8,7 @@ namespace ShapeLib
 {
 #if DEBUG
     /// <summary>
-    /// 
+    /// Рандом фигур
     /// </summary>
     public static class ShapeRandom
     {
@@ -18,14 +18,14 @@ namespace ShapeLib
         private static Random _random = new Random();
 
         /// <summary>
-        /// 
+        /// Создание рандомной фигуры
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Рандомная фигура</returns>
         public static ShapeBase GetRandomShape()
         {
-            double randRadius = _random.Next(0, 100);
-            double randSquareOfBase = _random.Next(0, 100);
-            double randHeight = _random.Next(0, 100);
+            double randRadius = _random.Next(1, 100);
+            double randSquareOfBase = _random.Next(1, 100);
+            double randHeight = _random.Next(1, 100);
             int randShape = _random.Next(1, 4);
 
             switch (randShape)

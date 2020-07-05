@@ -14,7 +14,7 @@ namespace ShapeLib
         /// <summary>
         /// Радиус сферы
         /// </summary>
-        private double _radius;
+        private double _radius = 1;
 
         /// <summary>
         /// Радиус сферы
@@ -45,6 +45,17 @@ namespace ShapeLib
             {
                 return Math.Round((4 / 3) * Math.PI *
                     Math.Pow(Radius, 3.0), 2);
+            }
+        }
+
+        /// <summary>
+        /// Параметры сферы
+        /// </summary>
+        public override string ParametersOfShape
+        {
+            get
+            {
+                return string.Format($"Радиус={Radius}");
             }
         }
     }

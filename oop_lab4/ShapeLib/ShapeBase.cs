@@ -7,7 +7,6 @@ using GalaSoft.MvvmLight;
 
 namespace ShapeLib
 {
-    //TODO: RSDN - название класса (V)
     /// <summary>
     /// Геометрические фигуры
     /// </summary>
@@ -34,5 +33,10 @@ namespace ShapeLib
         /// Расчет объема фигуры
         /// </summary>
         public abstract double Volume { get; }
+
+        /// <summary>
+        /// Все параметры фигуры
+        /// </summary>
+        public abstract string ParametersOfShape { get; }
     }
 }
