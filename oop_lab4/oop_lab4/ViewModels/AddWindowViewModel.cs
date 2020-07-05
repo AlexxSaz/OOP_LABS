@@ -144,12 +144,14 @@ namespace oop_lab4.ViewModels
         public RelayCommand SendShapeCommand { get; }
 
         /// <summary>
-        /// Закрытие окна
+        /// Отправка фигуры в главное окно
         /// </summary>
-        /// <param name="window"></param>
         public void SendShape()
         {
-            Messenger.Default.Send<ShapeBase>(SelectedShape);
+            if (SelectedShape != null)
+            {
+                Messenger.Default.Send<ShapeBase>(SelectedShape);
+            }
         }
 
         /// <summary>
