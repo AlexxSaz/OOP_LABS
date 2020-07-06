@@ -13,6 +13,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System.Windows;
+using Microsoft.Win32;
 
 namespace oop_lab4.ViewModels
 {
@@ -21,7 +22,6 @@ namespace oop_lab4.ViewModels
     /// </summary>
     public class MainWindowViewModel : ObservableObject
     {
-
         /// <summary>
         /// ВЫбранная фигура
         /// </summary>
@@ -47,34 +47,23 @@ namespace oop_lab4.ViewModels
         }
 
         /// <summary>
-        /// Окно добавления фигур
-        /// </summary>
-        public AddWindow AddWindow = new AddWindow();
-
-        /// <summary>
-        /// Окно поиска
-        /// </summary>
-        public SearchWindow SearchWindow = new SearchWindow();
-
-        /// <summary>
         /// Вызов окон
         /// </summary>
         private void ShowWindow(Window win)
         {
-            switch (win)
-            {
-                case SearchWindow searchWindow:
-                    win = new SearchWindow();
-                    Messenger.Default.Send<ObservableCollection<ShapeBase>>(Shapes);
-                    break;
-                case AddWindow addWindow:
-                    win = new AddWindow();
-                    break;
-            }
-
             if (win.IsActive == false)
             {
-                win.Show();
+                switch (win)
+                {
+                    case SearchWindow searchWindow:
+                        searchWindow.ShowDialog();
+                        Messenger.Default.
+                            Send<ObservableCollection<ShapeBase>>(Shapes);
+                        break;
+                    case AddWindow addWindow:
+                        addWindow.ShowDialog();
+                        break;
+                }
             }
         }
 
@@ -127,12 +116,14 @@ namespace oop_lab4.ViewModels
             Messenger.Default.Register<ShapeBase>(this, ShapeReceived);
 
             ShowAddWindowCommand = new RelayCommand(() =>
-            ShowWindow(AddWindow));
+            ShowWindow(new AddWindow()));
             ShowSearchWindowCommand = new RelayCommand(() =>
-            ShowWindow(SearchWindow));
+            ShowWindow(new SearchWindow()));
             RemoveShapeCommand = new RelayCommand(ShapeRemove);
-            SaveShapeCollectionCommand = new RelayCommand(SaveShapeCollection);
-            LoadShapeCollectionCommand = new RelayCommand(LoadShapeCollection);
+            SaveShapeCollectionCommand =
+                new RelayCommand(SaveShapeCollection);
+            LoadShapeCollectionCommand =
+                new RelayCommand(LoadShapeCollection);
 #if DEBUG
             RandomizeShapeCommand = new RelayCommand(ShapeRandomize);
 #endif
@@ -144,14 +135,30 @@ namespace oop_lab4.ViewModels
         /// </summary>
         private void SaveShapeCollection()
         {
+            var saveFile = new SaveFileDialog();
+            var shapesToSave = new List<ShapeBase>(Shapes);
+            string filePath;
+            saveFile.AddExtension = true;
+            saveFile.DefaultExt = ".saz";
+            saveFile.Filter = "Saz documents (.saz)|*.saz";
 
-            var shapeBases = new List<ShapeBase>(Shapes);
-
-            using (var fs = new FileStream("paol.saz", FileMode.OpenOrCreate))
+            if (saveFile.ShowDialog() == true)
             {
-                writer.Serialize(fs, shapeBases);
+                filePath = saveFile.FileName;
+            }
+            else
+            {
+                MessageBox.Show("Путь не определен!\n" +
+                    "Необходимо выбрать путь сохранения файла!");
+                return;
+            }
 
-                MessageBox.Show("Файл сохранен");
+            using (var fs = new FileStream(filePath, FileMode.OpenOrCreate))
+            {
+                writer.Serialize(fs, shapesToSave);
+
+                MessageBox.Show($"Файл {Path.GetFileName(filePath)} " +
+                    $"сохранен");
             }
         }
 
@@ -160,8 +167,23 @@ namespace oop_lab4.ViewModels
         /// </summary>
         private void LoadShapeCollection()
         {
+            string filePath;
+            var openFile = new OpenFileDialog();
+            openFile.Filter = "Saz documents (.saz)|*.saz";
+
+            if (openFile.ShowDialog() == true)
+            {
+                filePath = openFile.FileName;
+            }
+            else
+            {
+                MessageBox.Show("Файл не выбран!\nНеобходимо выбрать файл!");
+                return;
+            }
+
             Shapes.Clear();
-            using (var fs = new FileStream("paol.saz", FileMode.Open))
+
+            using (var fs = new FileStream(filePath, FileMode.Open))
             {
                 var listOfDeserializedShape =
                     (List<ShapeBase>)writer.Deserialize(fs);
@@ -169,7 +191,8 @@ namespace oop_lab4.ViewModels
                 {
                     Shapes.Add(shape);
                 }
-                MessageBox.Show("Файл загружен");
+                MessageBox.Show($"Файл {Path.GetFileName(filePath)} " +
+                    $"загружен");
             }
 
 
