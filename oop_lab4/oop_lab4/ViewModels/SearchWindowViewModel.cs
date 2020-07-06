@@ -128,7 +128,8 @@ namespace oop_lab4.ViewModels
             };
             SearchedShapes = new ObservableCollection<ShapeBase> { };
 
-            Messenger.Default.Register<ObservableCollection<ShapeBase>>(this, GetShapes);
+            Messenger.Default.
+                Register<ObservableCollection<ShapeBase>>(this, GetShapes);
 
             SearchShapeCommand = new RelayCommand(SearchShape);
         }

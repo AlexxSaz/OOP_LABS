@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:oop_lab4.ViewModels"
         xmlns:debug="debug-mode"
         mc:Ignorable="d"
-        Title="MainWindow" Height="320" Width="520"
+        Title="Работа с фигурами" Height="320" Width="520"
         MinHeight="270" MinWidth="400" SizeToContent="WidthAndHeight">
 
     <Window.Resources>
@@ -28,39 +28,39 @@
         </Grid.RowDefinitions>
 
         <ToolBar>
-            <ToggleButton ToolTip="Добавить фигуру"
+            <Button ToolTip="Добавить фигуру"
                           Command="{Binding ShowAddWindowCommand}">
                 <Image Source="/Images/add.ico"/>
-            </ToggleButton>
+            </Button>
             <Separator/>
-            <ToggleButton ToolTip="Удалить фигуру"
-                          Command="{Binding RemoveShapeCommand}">
+            <Button ToolTip="Удалить фигуру"
+                          Command="{Binding RemoveShapeCommand}" >
                 <Image Source="/Images/delete.ico"/>
-            </ToggleButton>
+            </Button>
             <mc:AlternateContent>
                 <mc:Choice Requires="debug">
                     <Separator/>
-                    <ToggleButton ToolTip="Create Random Data"
+                    <Button ToolTip="Create Random Data"
                           Command="{Binding RandomizeShapeCommand}">
                         <Image Source="/Images/rand.ico"/>
-                    </ToggleButton>
+                    </Button>
                 </mc:Choice>
             </mc:AlternateContent>
             <Separator/>
-            <ToggleButton ToolTip="Поиск"
+            <Button ToolTip="Поиск"
                           Command="{Binding ShowSearchWindowCommand}">
                 <Image Source="/Images/search.ico"/>
-            </ToggleButton>
+            </Button>
             <Separator/>
-            <ToggleButton ToolTip="Сохранить в файл"
+            <Button ToolTip="Сохранить в файл"
                           Command="{Binding SaveShapeCollectionCommand}">
                 <Image Source="/Images/save.ico"/>
-            </ToggleButton>
+            </Button>
             <Separator/>
-            <ToggleButton ToolTip="Загрузить файл"
+            <Button ToolTip="Загрузить файл"
                           Command="{Binding LoadShapeCollectionCommand}">
                 <Image Source="/Images/Load.ico"/>
-            </ToggleButton>
+            </Button>
         </ToolBar>
 
         <GroupBox Header="Фигуры" Padding="5" Grid.Row="1">

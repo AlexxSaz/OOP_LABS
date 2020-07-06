@@ -81,7 +81,7 @@
                     VerticalAlignment="Bottom">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <i:CallMethodAction MethodName="Hide"
+                        <i:CallMethodAction MethodName="Close"
                                         TargetObject="{Binding
                             RelativeSource={RelativeSource Mode=FindAncestor,
                             AncestorType=Window}}"/>
