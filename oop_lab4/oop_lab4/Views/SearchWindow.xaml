@@ -38,9 +38,13 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
+
+        <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Center"
+                      VerticalAlignment="Stretch" ShowsPreview="False"/>
+
         <StackPanel Margin="5" Grid.Column="0">
 
             <StackPanel>
@@ -91,7 +95,7 @@
             </StackPanel>
         </StackPanel>
 
-        <ListView ItemsSource="{Binding SearchedShapes}" Grid.Column="1">
+        <ListView ItemsSource="{Binding SearchedShapes}" Grid.Column="2">
             <ListView.View>
                 <GridView>
                     <GridViewColumn
@@ -100,16 +104,8 @@
                                 Header="Название"/>
                     <GridViewColumn
                                 DisplayMemberBinding=
-                                "{Binding Height}"
-                                Header="Высота"/>
-                    <GridViewColumn
-                                DisplayMemberBinding=
-                                "{Binding SquareOfBase}"
-                                Header="Полщадь основания"/>
-                    <GridViewColumn
-                                DisplayMemberBinding=
-                                "{Binding Radius}"
-                                Header="Радиус"/>
+                                "{Binding ParametersOfShape}"
+                                Header="Параметры"/>
                     <GridViewColumn
                                 DisplayMemberBinding=
                                 "{Binding Volume}"

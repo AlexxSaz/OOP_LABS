@@ -52,9 +52,14 @@
                 <Image Source="/Images/search.ico"/>
             </ToggleButton>
             <Separator/>
-            <ToggleButton ToolTip="Сохранить"
+            <ToggleButton ToolTip="Сохранить в файл"
                           Command="{Binding SaveShapeCollectionCommand}">
                 <Image Source="/Images/save.ico"/>
+            </ToggleButton>
+            <Separator/>
+            <ToggleButton ToolTip="Загрузить файл"
+                          Command="{Binding LoadShapeCollectionCommand}">
+                <Image Source="/Images/Load.ico"/>
             </ToggleButton>
         </ToolBar>
 
@@ -72,16 +77,8 @@
                                 Header="Название"/>
                             <GridViewColumn
                                 DisplayMemberBinding=
-                                "{Binding Height}"
-                                Header="Высота"/>
-                            <GridViewColumn
-                                DisplayMemberBinding=
-                                "{Binding SquareOfBase}"
-                                Header="Полщадь основания"/>
-                            <GridViewColumn
-                                DisplayMemberBinding=
-                                "{Binding Radius}"
-                                Header="Радиус"/>
+                                "{Binding ParametersOfShape}"
+                                Header="Параметры"/>
                             <GridViewColumn
                                 DisplayMemberBinding=
                                 "{Binding Volume}"
