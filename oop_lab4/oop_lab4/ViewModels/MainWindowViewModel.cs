@@ -56,9 +56,9 @@ namespace oop_lab4.ViewModels
                 switch (win)
                 {
                     case SearchWindow searchWindow:
-                        searchWindow.ShowDialog();
                         Messenger.Default.
                             Send<ObservableCollection<ShapeBase>>(Shapes);
+                        searchWindow.ShowDialog();
                         break;
                     case AddWindow addWindow:
                         addWindow.ShowDialog();
@@ -194,8 +194,6 @@ namespace oop_lab4.ViewModels
                 MessageBox.Show($"Файл {Path.GetFileName(filePath)} " +
                     $"загружен");
             }
-
-
         }
 #if DEBUG
         /// <summary>
