@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShapeLib
 {
+    [Serializable]
     /// <summary>
     /// Пирамида
     /// </summary>
@@ -36,8 +37,6 @@ namespace ShapeLib
                 {
                     _height = value;
                 }
-                RaisePropertyChanged(nameof(Volume));
-                RaisePropertyChanged(nameof(Height));
             }
         }
 
@@ -56,7 +55,6 @@ namespace ShapeLib
                 {
                     _squareOfBase = value;
                 }
-                RaisePropertyChanged(nameof(SquareOfBase));
             }
         }
 

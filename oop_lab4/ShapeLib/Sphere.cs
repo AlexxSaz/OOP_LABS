@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShapeLib
 {
+    [Serializable]
     /// <summary>
     /// Сфера
     /// </summary>
@@ -31,8 +32,7 @@ namespace ShapeLib
                 {
                     _radius = value;
                 }
-                RaisePropertyChanged(nameof(Volume));
-                RaisePropertyChanged(nameof(Radius));
+
             }
         }
 

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GalaSoft.MvvmLight;
 
 namespace ShapeLib
 {
+    [Serializable]
     /// <summary>
     /// Геометрические фигуры
     /// </summary>
-    public abstract class ShapeBase : ObservableObject
+    public abstract class ShapeBase
     {
         /// <summary>
         /// Имя фигуры
