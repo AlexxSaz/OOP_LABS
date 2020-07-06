@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +27,7 @@ namespace oop_lab4.ViewModels
         /// </summary>
         private ShapeBase _selectedShape;
 
-        /// <summary>
+        /// <summary> 
         /// Набор рассматриваемых фигур
         /// </summary>
         public ObservableCollection<ShapeBase> Shapes { get; set; }
@@ -111,6 +113,11 @@ namespace oop_lab4.ViewModels
         public RelayCommand SaveShapeCollectionCommand { get; }
 
         /// <summary>
+        /// Команда для сохранения коллекции фигур
+        /// </summary>
+        public RelayCommand LoadShapeCollectionCommand { get; }
+
+        /// <summary>
         /// Инициализация главного окна
         /// </summary>
         public MainWindowViewModel()
@@ -125,17 +132,47 @@ namespace oop_lab4.ViewModels
             ShowWindow(SearchWindow));
             RemoveShapeCommand = new RelayCommand(ShapeRemove);
             SaveShapeCollectionCommand = new RelayCommand(SaveShapeCollection);
+            LoadShapeCollectionCommand = new RelayCommand(LoadShapeCollection);
 #if DEBUG
             RandomizeShapeCommand = new RelayCommand(ShapeRandomize);
 #endif
         }
 
+        static BinaryFormatter writer = new BinaryFormatter();
         /// <summary>
         /// Сохранение коллекции фигур
         /// </summary>
         private void SaveShapeCollection()
         {
-            
+
+            var shapeBases = new List<ShapeBase>(Shapes);
+
+            using (var fs = new FileStream("paol.saz", FileMode.OpenOrCreate))
+            {
+                writer.Serialize(fs, shapeBases);
+
+                MessageBox.Show("Файл сохранен");
+            }
+        }
+
+        /// <summary>
+        /// Загрузка коллекции фигур
+        /// </summary>
+        private void LoadShapeCollection()
+        {
+            Shapes.Clear();
+            using (var fs = new FileStream("paol.saz", FileMode.Open))
+            {
+                var listOfDeserializedShape =
+                    (List<ShapeBase>)writer.Deserialize(fs);
+                foreach (ShapeBase shape in listOfDeserializedShape)
+                {
+                    Shapes.Add(shape);
+                }
+                MessageBox.Show("Файл загружен");
+            }
+
+
         }
 #if DEBUG
         /// <summary>
@@ -143,12 +180,12 @@ namespace oop_lab4.ViewModels
         /// </summary>
         private void ShapeRandomize()
         {
-            int i;
-            for (i = 0; i < 10; i++)
+            const int numberOfShapes = 10;
+            for (int i = 0; i < numberOfShapes; i++)
             {
                 Shapes.Add(ShapeRandom.GetRandomShape());
             }
-            MessageBox.Show($"Зарандомлено {i} фигур");
+            MessageBox.Show($"Зарандомлено {numberOfShapes} фигур");
         }
 #endif
         /// <summary>
