@@ -27,6 +27,11 @@ namespace oop_lab4.ViewModels
         /// </summary>
         private ShapeBase _selectedShape;
 
+        /// <summary>
+        /// Объект сериализации
+        /// </summary>
+        BinaryFormatter Writer = new BinaryFormatter();
+
         /// <summary> 
         /// Набор рассматриваемых фигур
         /// </summary>
@@ -129,7 +134,6 @@ namespace oop_lab4.ViewModels
 #endif
         }
 
-        static BinaryFormatter writer = new BinaryFormatter();
         /// <summary>
         /// Сохранение коллекции фигур
         /// </summary>
@@ -155,7 +159,7 @@ namespace oop_lab4.ViewModels
 
             using (var fs = new FileStream(filePath, FileMode.OpenOrCreate))
             {
-                writer.Serialize(fs, shapesToSave);
+                Writer.Serialize(fs, shapesToSave);
 
                 MessageBox.Show($"Файл {Path.GetFileName(filePath)} " +
                     $"сохранен");
@@ -185,8 +189,18 @@ namespace oop_lab4.ViewModels
 
             using (var fs = new FileStream(filePath, FileMode.Open))
             {
-                var listOfDeserializedShape =
-                    (List<ShapeBase>)writer.Deserialize(fs);
+                List<ShapeBase> listOfDeserializedShape = null;
+                try
+                {
+                    listOfDeserializedShape =
+                    (List<ShapeBase>)Writer.Deserialize(fs);
+                }
+                catch
+                {
+                    MessageBox.Show("Невозможно прочитать данный файл");
+                    return;
+                }
+
                 foreach (ShapeBase shape in listOfDeserializedShape)
                 {
                     Shapes.Add(shape);
