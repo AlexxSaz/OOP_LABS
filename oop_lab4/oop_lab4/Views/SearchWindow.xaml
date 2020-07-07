@@ -75,11 +75,11 @@
                              IsEnabled="{Binding IsVolumeEntered}"/>
                     </StackPanel>
                 </StackPanel>
-                
+
             </StackPanel>
-            
+
             <StackPanel Orientation="Horizontal">
-                
+
                 <Button Content="Поиск"
                         Command="{Binding SearchShapeCommand}"/>
                 <Button Content="Отмена">
@@ -95,23 +95,25 @@
             </StackPanel>
         </StackPanel>
 
-        <ListView ItemsSource="{Binding SearchedShapes}" Grid.Column="2">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn
+        <ScrollViewer CanContentScroll="True" Height="250" Grid.Column="2">
+            <ListView ItemsSource="{Binding SearchedShapes}" Grid.Column="2">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn
                                 DisplayMemberBinding=
                                 "{Binding NameOfShape}"
                                 Header="Название"/>
-                    <GridViewColumn
+                        <GridViewColumn
                                 DisplayMemberBinding=
                                 "{Binding ParametersOfShape}"
                                 Header="Параметры"/>
-                    <GridViewColumn
+                        <GridViewColumn
                                 DisplayMemberBinding=
                                 "{Binding Volume}"
                                 Header="Объем"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ScrollViewer>
     </Grid>
 </Window>
